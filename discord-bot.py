@@ -66,7 +66,7 @@ async def defolma(ctx, *, member):
 
 
 @client.command()
-async def temizlik(ctx, amount=5):
+async def temizle(ctx, amount=5):
     if amount > 0:
         await ctx.channel.purge(limit=amount)
         await ctx.channel.send(f"<@{ctx.message.author.id}> efendimizin emri üzerine {amount} mesaj temizlendi")
