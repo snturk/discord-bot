@@ -64,4 +64,13 @@ async def defolma(ctx, *, member):
             await ctx.guild.unban(user)
             await ctx.channel.send(f"{user.mention} artık banlı değil")
 
+
+@client.command()
+async def temizlik(ctx, amount=5):
+    if amount > 0:
+        await ctx.channel.purge(limit=amount)
+        await ctx.channel.send(f"<@{ctx.message.author.id}> efendimizin emri üzerine {amount} mesaj temizlendi")
+    else:
+        await ctx.channel.send(f"olmaz")
+
 client.run(botToken.TOKEN)
