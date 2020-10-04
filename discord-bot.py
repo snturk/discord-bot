@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
-
-TOKEN = 'NzYyMjc2NDMyMDg4MDA2NjY2.X3mzPw.CC6zyDcAGObSwKEzP93U4rZCOxw'
+import botToken
 
 client = commands.Bot(command_prefix='-')
 
@@ -39,4 +38,4 @@ async def leave(ctx):
         await server.disconnect()
 
 
-client.run(TOKEN)
+client.run(botToken.TOKEN)
