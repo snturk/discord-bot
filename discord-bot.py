@@ -15,14 +15,14 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!tndr'):
+    if message.content.startswith('tropic'):
         await message.channel.send('HAHA')
 
     await client.process_commands(message)
 
 
 @client.command(pass_context=True)
-async def join(ctx):
+async def gel(ctx):
     if ctx.message.author.voice:
         channel = ctx.message.author.voice.channel
         print(channel, 'HAH')
@@ -32,15 +32,36 @@ async def join(ctx):
 
 
 @client.command(pass_context = True)
-async def leave(ctx):
+async def git(ctx):
     if ctx.message.author.voice:
         server = ctx.message.guild.voice_client
         await server.disconnect()
 
+
 @client.command()
 @commands.has_permissions(kick_members=True)
-async def kick(self, ctx, member: discord.Member, *, reason=None):
+async def tekmele(self, ctx, member: discord.Member, *, reason=None):
     await member.kick()
-    await log_channel.send(f"{ctx.author.name} bunu şutladı: {member.display_name}")
+
+
+@client.command()
+@commands.has_permissions(ban_members=True)
+async def defol(self, ctx, member: discord.Member, *, reason=None):
+    await member.ban()
+    await ctx.channel.send(f"{user.mention} defoldu")
+
+
+@client.command()
+@commands.has_permissions(ban_members=True)
+async def defolma(ctx, *, member):
+    banned_users = await ctx.guild.bans()
+
+    member_name, member_discriminator = member.split('#')
+    for ban_entry in banned_users:
+        user = ban_entry.user
+
+        if (user.name, user.discriminator) == (member_name, member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.channel.send(f"{user.mention} artık banlı değil")
 
 client.run(botToken.TOKEN)
