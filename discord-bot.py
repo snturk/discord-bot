@@ -37,5 +37,10 @@ async def leave(ctx):
         server = ctx.message.guild.voice_client
         await server.disconnect()
 
+@client.command()
+@commands.has_permissions(kick_members=True)
+async def kick(self, ctx, member: discord.Member, *, reason=None):
+    await member.kick()
+    await log_channel.send(f"{ctx.author.name} bunu şutladı: {member.display_name}")
 
 client.run(botToken.TOKEN)
