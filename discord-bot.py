@@ -74,15 +74,21 @@ async def git(ctx):
 
 
 @client.command(pass_context=True)
-async def oynat(ctx, url):
-    YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
+async def oynat(ctx, url: str):
+
+    YDL_OPTIONS = {'format': 'bestaudio/best', 'noplaylist': 'True', 'default_search': 'auto'}
     FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
     voice = get(client.voice_clients, guild=ctx.guild)
 
     if not voice.is_playing():
         with YoutubeDL(YDL_OPTIONS) as ydl:
             info = ydl.extract_info(url, download=False)
-        URL = info['formats'][0]['url']
+
+        if str(url).startswith('http'):
+            URL = info['formats'][0]['url']
+        else:
+            URL = info['entries'][0]['formats'][0]['url']
+
         voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
         voice.is_playing()
     else:
