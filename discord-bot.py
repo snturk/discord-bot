@@ -17,11 +17,40 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    channel = message.channel
+    content = message.content
     if message.author == client.user:
         return
 
-    if message.content.startswith('tropic'):
-        await message.channel.send('HAHA')
+    if content.startswith('tropic'):
+        await message.channel.send('''
+        :pear: HAHA komutlar şöyle;
+        
+        :coconut:   **-temizle** [sayı]: sayı kadar *mesajı kanaldan temizle*, sayı yazılmazsa 5 mesaj temizler
+            
+        :avocado:    **-gel**: kanala *çağır*
+            
+        :cucumber:    **-git**: kanaldan *git*
+            
+        :cherries:    **-oynat [url]**: kanalda iken *youtube videosu çal*
+            
+        :carrot:    **-tekmele [biri]**: birini sunucudan *at*
+            
+        :potato:    **-defol [biri]**: birini sunucudan *yasakla*
+            
+        :tomato:    **-defolma [isim#etiket]**: birinin *yasağını kaldır*
+             
+                                   ''')
+
+    if str(channel) == "🍇tropic-komut🍇":
+        if not message.author == "tropic" and not content.startswith("-"):
+            await message.channel.purge(limit=1)
+            await channel.send('lütfen, sadece komut')
+    elif content.startswith("-") and not content.startswith("-temizle"):
+        await message.channel.purge(limit=1)
+        await channel.send('bura yeri değil, 🍇tropic-komut🍇 kanalına bekleriz')
+
+
 
     await client.process_commands(message)
 
