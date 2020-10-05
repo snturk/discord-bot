@@ -9,21 +9,7 @@ client = commands.Bot(command_prefix='-')
 
 players = {}
 
-
-@client.event
-async def on_ready():
-    print("Ready")
-
-
-@client.event
-async def on_message(message):
-    channel = message.channel
-    content = message.content
-    if message.author == client.user:
-        return
-
-    if content.startswith('tropic'):
-        await message.channel.send('''
+botManual = '''
         :pear: HAHA komutlar şöyle;
         
         :coconut:   **-temizle** [sayı]: sayı kadar *mesajı kanaldan temizle*, sayı yazılmazsa 5 mesaj temizler
@@ -40,13 +26,41 @@ async def on_message(message):
             
         :tomato:    **-defolma [isim#etiket]**: birinin *yasağını kaldır*
              
-                                   ''')
+                                   '''
+
+async def setDeafultMsg(defaultMsg, channelId):
+
+    commandChannel = client.get_channel(channelId)
+
+    totalMsgCount = 0
+    async for message in commandChannel.history():
+        totalMsgCount += 1
+    if totalMsgCount == 0:
+        await commandChannel.send(defaultMsg)
+
+
+@client.event
+async def on_ready():
+    print("Ready")
+
+    await setDeafultMsg(botManual, 762656223815794689);
+
+
+@client.event
+async def on_message(message):
+    channel = message.channel
+    content = message.content
+    if message.author == client.user:
+        return
+
+    if content.startswith('tropic'):
+        await message.channel.send(botManual)
 
     if str(channel) == "🍇tropic-komut🍇":
         if not message.author == "tropic" and not content.startswith("-"):
             await message.channel.purge(limit=1)
             await channel.send('lütfen, sadece komut')
-    elif content.startswith("-") and not content.startswith("-temizle"):
+    elif content.startswith("-") and not content.startswith("-temizle") and not content.startswith("-kanalTemizle"):
         await message.channel.purge(limit=1)
         await channel.send('bura yeri değil, 🍇tropic-komut🍇 kanalına bekleriz')
 
@@ -124,6 +138,13 @@ async def defolma(ctx, *, member):
             await ctx.channel.send(f"{user.mention} artık banlı değil")
 
 
+@client.command(pass_context=True)
+@commands.has_permissions(change_nickname=True)
+async def takmaAd(ctx, member: discord.Member, newNick):
+    await ctx.channel.send(f'<@{member.id}>, efendimiz sana {newNick} ismini layık gördü')
+    await member.edit(nick=newNick)
+
+
 @client.command()
 async def temizle(ctx, amount=5):
     if amount > 0:
@@ -131,5 +152,20 @@ async def temizle(ctx, amount=5):
         await ctx.channel.send(f"<@{ctx.message.author.id}> efendimizin emri üzerine {amount} mesaj temizlendi")
     else:
         await ctx.channel.send(f"olmaz")
+
+    await setDeafultMsg(botManual, 762656223815794689)
+
+
+@client.command()
+async def kanalTemizle(ctx):
+
+    msgToDeleteCount = 0
+    async for message in ctx.channel.history():
+            msgToDeleteCount += 1
+
+    if str(ctx.channel) == "🍇tropic-komut🍇":
+        msgToDeleteCount -= 1
+    await ctx.channel.purge(limit=msgToDeleteCount)
+    await ctx.channel.send('efendimiz kanalı sildi süpürdü')
 
 client.run(botToken.TOKEN)
