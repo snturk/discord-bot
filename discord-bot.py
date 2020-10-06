@@ -61,7 +61,7 @@ async def on_message(message):
         if not message.author == "tropic" and not content.startswith("-"):
             await message.channel.purge(limit=1)
             await channel.send('lütfen, sadece komut')
-    elif content.startswith("-") and not content.startswith("-temizle") and not content.startswith("-kanalTemizle"):
+    elif content.startswith("-") and not content.startswith("-temizle"):
         await message.channel.purge(limit=1)
         await channel.send('bura yeri değil, 🍇tropic-komut🍇 kanalına bekleriz')
 
