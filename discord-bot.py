@@ -56,7 +56,6 @@ async def on_message(message):
         return
 
     if content.startswith('tropic'):
-        await message.channel.send(botManual)
         await message.channel.send("komutlar için 🍇tropic-komut🍇 kanalına uç")
 
     if str(channel) == "🍇tropic-komut🍇":
@@ -132,6 +131,7 @@ async def bitir(ctx):
     voice = get(client.voice_clients, guild=ctx.guild)
     voice.stop()
     await ctx.message.add_reaction('🥓')
+
 
 @client.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
