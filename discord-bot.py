@@ -13,6 +13,8 @@ botManual = '''
         :pear: HAHA komutlar şöyle;
         
         :coconut:   **-temizle** [sayı]: sayı kadar *mesajı kanaldan temizle*, sayı yazılmazsa 5 mesaj temizler
+        
+        :apple:     **-kanalTemizle**: kanala atılan *tüm mesajları* (sabitlenenler hariç) temizler
             
         :avocado:    **-gel**: kanala *çağır*
             
@@ -55,6 +57,7 @@ async def on_message(message):
 
     if content.startswith('tropic'):
         await message.channel.send(botManual)
+        await message.channel.send("komutlar için 🍇tropic-komut🍇 kanalına uç")
 
     if str(channel) == "🍇tropic-komut🍇":
         if not message.author == "tropic" and not content.startswith("-"):
