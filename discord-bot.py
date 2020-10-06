@@ -71,6 +71,10 @@ async def on_message(message):
 
 
 @client.command(pass_context=True)
+async def komutlar(ctx):
+    await ctx.message.channel.send(botManual)
+
+@client.command(pass_context=True)
 async def gel(ctx):
     if ctx.message.author.voice:
         channel = ctx.message.author.voice.channel
