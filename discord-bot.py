@@ -172,25 +172,21 @@ async def takmaAd(ctx, member: discord.Member, newNick):
 
 
 @client.command()
-async def temizle(ctx, amount=5):
-    if amount > 0:
-        await ctx.channel.purge(limit=amount)
-        await ctx.channel.send(f"<@{ctx.message.author.id}> efendimizin emri üzerine {amount} mesaj temizlendi")
-    else:
-        await ctx.channel.send(f"olmaz")
-
-    await setDeafultMsg(botManual, 762656223815794689)
-
-
-@client.command()
-async def kanalTemizle(ctx):
-
-    msgToDeleteCount = 0
-    async for message in ctx.channel.history():
+async def temizle(ctx, amount="5"):
+    if str(amount) == "kanal":
+        msgToDeleteCount = 0
+        async for i in ctx.channel.history():
             msgToDeleteCount += 1
 
-    if str(ctx.channel) == "🍇tropic-komut🍇":
-        msgToDeleteCount -= 1
+        await ctx.channel.purge(limit=msgToDeleteCount)
+    else:
+        if int(amount) > 0:
+            await ctx.channel.purge(limit=int(amount))
+            await ctx.channel.send(f"<@{ctx.message.author.id}> efendimizin emri üzerine {amount} mesaj temizlendi")
+        else:
+            await ctx.channel.send(f"olmaz")
+
+
     await ctx.channel.purge(limit=msgToDeleteCount)
     await ctx.channel.send('efendimiz kanalı sildi süpürdü')
 
