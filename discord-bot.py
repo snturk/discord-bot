@@ -3,7 +3,9 @@ from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
 from youtube_dl import YoutubeDL
-import botToken
+import os
+
+token = os.getenv("DISCORD_BOT_TOKEN")
 
 client = commands.Bot(command_prefix='-')
 
@@ -191,4 +193,4 @@ async def kanalTemizle(ctx):
     await ctx.channel.purge(limit=msgToDeleteCount)
     await ctx.channel.send('efendimiz kanalı sildi süpürdü')
 
-client.run(botToken.TOKEN)
+client.run(token)
