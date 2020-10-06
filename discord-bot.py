@@ -114,6 +114,26 @@ async def oynat(ctx, url: str):
 
 
 @client.command(pass_context=True)
+async def durdur(ctx):
+    voice = get(client.voice_clients, guild=ctx.guild)
+    voice.pause()
+    await ctx.message.add_reaction('🍳')
+
+
+@client.command(pass_context=True)
+async def devamke(ctx):
+    voice = get(client.voice_clients, guild=ctx.guild)
+    voice.resume()
+    await ctx.message.add_reaction('🍦')
+
+
+@client.command(pass_context=True)
+async def bitir(ctx):
+    voice = get(client.voice_clients, guild=ctx.guild)
+    voice.stop()
+    await ctx.message.add_reaction('🥓')
+
+@client.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
 async def tekmele(ctx, member: discord.Member):
     await member.kick()
