@@ -174,7 +174,7 @@ async def takmaAd(ctx, member: discord.Member, newNick):
 @client.command()
 async def temizle(ctx, amount="5"):
     if str(amount) == "kanal":
-        msgToDeleteCount = 0
+        msgToDeleteCount = 1
         async for i in ctx.channel.history():
             msgToDeleteCount += 1
 
