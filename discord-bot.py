@@ -57,9 +57,6 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if content.startswith('tropic'):
-        await message.channel.send("komutlar için 🍇tropic-komut🍇 kanalına uç")
-
     if str(channel) == "🍇tropic-komut🍇":
         if not message.author == "tropic" and not content.startswith("-"):
             await message.channel.purge(limit=1)
