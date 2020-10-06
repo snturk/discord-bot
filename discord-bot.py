@@ -14,9 +14,8 @@ players = {}
 botManual = '''
         :pear: HAHA komutlar şöyle;
         
-        :coconut:   **-temizle** [sayı]: sayı kadar *mesajı kanaldan temizle*, sayı yazılmazsa 5 mesaj temizler
+        :coconut:   **-temizle** [komut]: komut eğer sayı ise o sayı kadar *mesajı kanaldan temizle*, komut olarak **kanal** yazılırsa kanalı temizler, sayı yazılmazsa 5 mesaj temizler
         
-        :apple:     **-kanalTemizle**: kanala atılan *tüm mesajları* (sabitlenenler hariç) temizler
             
         :avocado:    **-gel**: kanala *çağır*
             
@@ -167,7 +166,7 @@ async def defolma(ctx, *, member):
 @client.command(pass_context=True)
 @commands.has_permissions(change_nickname=True)
 async def takmaAd(ctx, member: discord.Member, newNick):
-    await ctx.channel.send(f'<@{member.id}>, efendimiz sana {newNick} ismini layık gördü')
+    await ctx.channel.send(f'<@{member.id}>, efendimiz sana **{newNick}** ismini layık gördü')
     await member.edit(nick=newNick)
 
 
