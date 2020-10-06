@@ -187,7 +187,5 @@ async def temizle(ctx, amount="5"):
             await ctx.channel.send(f"olmaz")
 
 
-    await ctx.channel.purge(limit=msgToDeleteCount)
-    await ctx.channel.send('efendimiz kanalı sildi süpürdü')
 
 client.run(token)
