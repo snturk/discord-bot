@@ -188,4 +188,4 @@ async def temizle(ctx, amount="5"):
 
 
 
-client.run("NzYyMjc2NDMyMDg4MDA2NjY2.X3mzPw.SINc3fl_jdVTSKm7G8eNWWtssss")
+client.run(token)
