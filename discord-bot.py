@@ -21,7 +21,7 @@ botManual = '''
             
         :cucumber:    **-git**: kanaldan *git*
             
-        :cherries:    **-oynat [url]**: kanalda iken *youtube videosu çal*
+        :cherries:    **-oynat [video adı]**: kanalda iken *youtube videosu çal*
             
         :carrot:    **-tekmele [biri]**: birini sunucudan *at*
             
@@ -187,4 +187,4 @@ async def temizle(ctx, amount="5"):
 
 
 
-client.run(token)
+client.run("NzYyMjc2NDMyMDg4MDA2NjY2.X3mzPw.SINc3fl_jdVTSKm7G8eNWWtssss")
