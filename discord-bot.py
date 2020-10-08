@@ -46,7 +46,6 @@ async def setDeafultMsg(defaultMsg, channelId):
 async def on_ready():
     print("Ready")
 
-    await setDeafultMsg(botManual, 762656223815794689);
 
 
 @client.event
