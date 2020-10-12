@@ -31,22 +31,14 @@ botManual = '''
              
                                    '''
 
-async def setDeafultMsg(defaultMsg, channelId):
-
-    commandChannel = client.get_channel(channelId)
-
-    totalMsgCount = 0
-    async for message in commandChannel.history():
-        totalMsgCount += 1
-    if totalMsgCount == 0:
-        await commandChannel.send(defaultMsg)
-
-
 @client.event
 async def on_ready():
     print("Ready")
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 @client.event
 async def on_message(message):
