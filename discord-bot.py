@@ -98,7 +98,8 @@ async def oynat(ctx):
         else:
             URL = info['entries'][0]['formats'][0]['url']
 
-        ctx.message.channel.send(URL)
+        await ctx.message.channel.send("şunu çalıyorum: " + str(info['entries'][0]['webpage_url']))
+
         voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
         voice.is_playing()
     else:
