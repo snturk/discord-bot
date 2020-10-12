@@ -35,10 +35,6 @@ botManual = '''
 async def on_ready():
     print("Ready")
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 @client.event
 async def on_message(message):
