@@ -83,7 +83,7 @@ async def oynat(ctx):
     await gel(ctx)
     key = ctx.message.content
 
-    url = key.replace("-oynat ", "")
+    input = key.replace("-oynat ", "")
 
     YDL_OPTIONS = {'format': 'bestaudio/best', 'noplaylist': 'False', 'default_search': 'auto'}
     FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
@@ -91,15 +91,14 @@ async def oynat(ctx):
 
     if not voice.is_playing():
         with YoutubeDL(YDL_OPTIONS) as ydl:
-            info = ydl.extract_info(url, download=False)
+            info = ydl.extract_info(input, download=False)
 
-        if str(url).startswith('http'):
+        if str(input).startswith('http'):
             URL = info['formats'][0]['url']
         else:
             URL = info['entries'][0]['formats'][0]['url']
 
-        await ctx.message.channel.send("şunu çalıyorum: " + str(info['entries'][0]['webpage_url']))
-
+        ctx.channel.send('çalıyorum')
         voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
         voice.is_playing()
     else:
