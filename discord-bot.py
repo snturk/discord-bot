@@ -96,9 +96,10 @@ async def oynat(ctx):
         if str(input).startswith('http'):
             URL = info['formats'][0]['url']
         else:
-            URL = info['entries'][0]['formats'][0]['url']
+            ##URL = info['entries'][0]['formats'][0]['url']
+            print(info)
 
-        ctx.channel.send('çalıyorum')
+        ctx.channel.send('oynatıyorum')
         voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
         voice.is_playing()
     else:
@@ -175,7 +176,7 @@ async def temizle(ctx, amount="5"):
             await ctx.channel.purge(limit=int(amount))
             await ctx.channel.send(f"<@{ctx.message.author.id}> efendimizin emri üzerine {amount} mesaj temizlendi")
         else:
-            await ctx.channel.send(f"olmaz")
+            await ctx.channel.send("olmaz")
 
 
 
